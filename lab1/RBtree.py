@@ -98,7 +98,6 @@ class RedBlackTree():
             self.__print_helper(node.right, indent, True)
 
     def blackDelete(self, x): #function 'blackDelete' is used to fix color problems, which appear after deleting black elem from tree
-        while x != self.root and x.color == 0:
 
             if x == x.parent.left:
                 sibling = x.parent.right
@@ -132,7 +131,7 @@ class RedBlackTree():
                     self.right_rotate(x.parent)
                     sibling = x.parent.left
 
-                if sibling.right.color == 0 and sibling.right.color == 0:
+                if sibling.right.color == 0:
                     sibling.color = 1
                     x = x.parent
                 else:
@@ -148,7 +147,7 @@ class RedBlackTree():
                     self.right_rotate(x.parent)
                     x = self.root
 
-        x.color = 0
+            x.color = 0
 
     def transplant(self, u, v): #func to transplant two nodes of tree
         if u.parent == None:
@@ -225,6 +224,6 @@ rb.add_node(1, 16)
 
 rb.RBprint_tree()
 
-rb.RBdelete_node(20)
+rb.RBdelete_node(16)
 
 rb.RBprint_tree()
