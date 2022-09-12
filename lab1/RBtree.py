@@ -21,43 +21,43 @@ class RedBlackTree:
         self.nil.right = None
         self.root = self.nil
 
-    def left_rotate(self, x):
+    def left_rotate(self, rotate_node):
         """"
             Left-Rotate
         """
-        y = x.right
-        x.right = y.left
-        if y.left is not self.nil:
-            y.left.parent = x
+        rotate_child = rotate_node.right
+        rotate_node.right = rotate_child.left
+        if rotate_child.left is not self.nil:
+            rotate_child.left.parent = rotate_node
 
-        y.parent = x.parent
-        if x.parent is None:
-            self.root = y
-        elif x is x.parent.left:
-            x.parent.left = y
+        rotate_child.parent = rotate_node.parent
+        if rotate_node.parent is None:
+            self.root = rotate_child
+        elif rotate_node is rotate_node.parent.left:
+            rotate_node.parent.left = rotate_child
         else:
-            x.parent.right = y
-        y.left = x
-        x.parent = y
+            rotate_node.parent.right = rotate_child
+        rotate_child.left = rotate_node
+        rotate_node.parent = rotate_child
 
-    def right_rotate(self, x):
+    def right_rotate(self, rotate_node):
         """"
             Right-Rotate
         """
-        y = x.left
-        x.left = y.right
-        if y.right is not self.nil:
-            y.right.parent = x
+        rotate_child = rotate_node.left
+        rotate_node.left = rotate_child.right
+        if rotate_child.right is not self.nil:
+            rotate_child.right.parent = rotate_node
 
-        y.parent = x.parent
-        if x.parent is None:
-            self.root = y
-        elif x is x.parent.right:
-            x.parent.right = y
+        rotate_child.parent = rotate_node.parent
+        if rotate_node.parent is None:
+            self.root = rotate_child
+        elif rotate_node is rotate_node.parent.right:
+            rotate_node.parent.right = rotate_child
         else:
-            x.parent.left = y
-        y.right = x
-        x.parent = y
+            rotate_node.parent.left = rotate_child
+        rotate_child.right = rotate_node
+        rotate_node.parent = rotate_child
 
     def add_node(self, color, key):
         """
@@ -71,14 +71,14 @@ class RedBlackTree:
         node.color = color
 
         y = None
-        iterat = self.root
+        node_iterator = self.root
 
-        while iterat is not self.nil:
-            y = iterat
-            if node.val < iterat.val:
-                iterat = iterat.left
+        while node_iterator is not self.nil:
+            y = node_iterator
+            if node.val < node_iterator.val:
+                node_iterator = node_iterator.left
             else:
-                iterat = iterat.right
+                node_iterator = node_iterator.right
 
         node.parent = y
         if y is None:
@@ -181,48 +181,48 @@ class RedBlackTree:
             parent.parent.right = child
         child.parent = parent.parent
 
-    def delete_node_general(self, node, val):
+    def delete_node(self, node, val):
         """"
             func in which i delete node s in usual binary tree
             and if color is black, call another function to fix it
         """
-        del_node = self.nil
+        node_to_delete = self.nil
         while node is not self.nil:
             if node.val is val:
-                del_node = node
+                node_to_delete = node
 
             if node.val <= val:
                 node = node.right
             else:
                 node = node.left
 
-        if del_node is self.nil:
+        if node_to_delete is self.nil:
             print("theres no such node here:)")
             return
 
-        y = del_node
-        new_color = y.color
-        if del_node.left is self.nil:
-            del_child = del_node.right
-            self.transplant(del_node, del_node.right)
-        elif del_node.right is self.nil:
-            del_child = del_node.left
-            self.transplant(del_node, del_node.left)
+        node_to_delete_analog = node_to_delete
+        new_color = node_to_delete_analog.color
+        if node_to_delete.left is self.nil:
+            del_child = node_to_delete.right
+            self.transplant(node_to_delete, node_to_delete.right)
+        elif node_to_delete.right is self.nil:
+            del_child = node_to_delete.left
+            self.transplant(node_to_delete, node_to_delete.left)
         else:
-            y = self.rb_minimum(del_node.right)
-            new_color = y.color
-            del_child = y.right
-            if y.parent is del_node:
-                del_child.parent = y
+            node_to_delete_analog = self.rb_minimum(node_to_delete.right)
+            new_color = node_to_delete_analog.color
+            del_child = node_to_delete_analog.right
+            if node_to_delete_analog.parent is node_to_delete:
+                del_child.parent = node_to_delete_analog
             else:
-                self.transplant(y, y.right)
-                y.right = del_node.right
-                y.right.parent = y
+                self.transplant(node_to_delete_analog, node_to_delete_analog.right)
+                node_to_delete_analog.right = node_to_delete.right
+                node_to_delete_analog.right.parent = node_to_delete_analog
 
-            self.transplant(del_node, y)
-            y.left = del_node.left
-            y.left.parent = y
-            y.color = del_node.color
+            self.transplant(node_to_delete, node_to_delete_analog)
+            node_to_delete_analog.left = node_to_delete.left
+            node_to_delete_analog.left.parent = node_to_delete_analog
+            node_to_delete_analog.color = node_to_delete.color
         if new_color == 0:
             self.black_delete(del_child)
 
@@ -230,7 +230,7 @@ class RedBlackTree:
         """
             func to be comfortable to call 'delete general' out of class
         """
-        self.delete_node_general(self.root, val)
+        self.delete_node(self.root, val)
 
     def rb_minimum(self, node):
         """
