@@ -2,35 +2,32 @@ import numpy as np
 
 matrix = np.loadtxt('input.txt', dtype=int)
 
-
 def BFS():
     for i in range(len(matrix)):
         for j in range(len(matrix[0])):
             if matrix[i][j] == 0:
                 if i > 0:
-                    if j > 0:
-                        if matrix[i - 1][j - 1] == 1:
-                            matrix[i - 1][j - 1] = -1
                     if j + 1 < (len(matrix[i])):
                         if matrix[i - 1][j + 1] == 1:
                             matrix[i - 1][j + 1] = -1
                     if matrix[i - 1][j] == 1:
                         matrix[i - 1][j] = -1
-                if j > 0:
+                elif j > 0:
                     if matrix[i][j - 1] == 1:
                         matrix[i][j - 1] = -1
+                    if matrix[i - 1][j - 1] == 1:
+                        matrix[i - 1][j - 1] = -1
                     if i + 1 < (len(matrix)):
                         if matrix[i + 1][j - 1] == 1:
                             matrix[i + 1][j - 1] = -1
-                if i + 1 < (len(matrix)):
+                elif i + 1 < (len(matrix)) or j + 1 < (len(matrix[i])):
                     if matrix[i + 1][j] == 1:
                         matrix[i + 1][j] = -1
-                if i + 1 < (len(matrix)) and j + 1 < (len(matrix[i])):
-                    if matrix[i + 1][j + 1] == 1:
-                        matrix[i + 1][j + 1] = -1
-                if j + 1 < (len(matrix[i])):
                     if matrix[i][j + 1] == 1:
                         matrix[i][j + 1] = -1
+                elif i + 1 < (len(matrix)) and j + 1 < (len(matrix[i])):
+                    if matrix[i + 1][j + 1] == 1:
+                        matrix[i + 1][j + 1] = -1
 
     dist = []
     N = len(matrix)
