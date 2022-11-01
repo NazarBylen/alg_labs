@@ -31,7 +31,8 @@ def dist_for_element(transpose_matrix, width):
 
             if i > 0 and j_value != transpose_matrix[i - 1][j]:
                 relatives[j_value][i] += 1
-                routes[j_value][i] *= routes[transpose_matrix[i - 1][j]][i - 1]
+                prev = transpose_matrix[i - 1][j]
+                routes[j_value][i] *= routes[prev][i - 1]
 
         if i == 0:
             continue
