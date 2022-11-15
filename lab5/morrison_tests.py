@@ -3,12 +3,12 @@ import KMPAlg
 
 
 def test_slow():
-    string = 'aaaasaaaasasaaaaaassaaaaaaaasaaasaaaaasaaaaaaaaasaaaaaaaaasaaaaaaaaasaaaaaaaaas'
+    string = 'abbabiaabbabaaiabbabbabaabbabaiaabb'
     for i in range(15):
         string = string + string
 
-    string = string + 'd'
-    substring = 'asd'
+    string = string + 'ababiaiai'
+    substring = 'ababiaiai'
 
     start = time.time()
     assert KMPAlg.knuth_morris_pratt(string, substring) == True
@@ -16,12 +16,12 @@ def test_slow():
     print("it took", time.time() - start, "seconds.")
 
 def test_mid_speed_fisrt():
-    string = 'uisuissssuuuiuiuiisuiuusiiiusisiausrrgghjhusuiuhkbnffffsuiiiiuuuiiiiiiiiihhhj'
+    string = 'suissuiffiussissuiffiufiussissuiffius'
     for i in range(10):
         string = string + string
 
-    string = string + 'suiusdf'
-    substring = 'suius'
+    string = string + 'iusiusiu'
+    substring = 'siusiusiu'
 
     start = time.time()
     assert KMPAlg.knuth_morris_pratt(string, substring) == True
@@ -29,12 +29,12 @@ def test_mid_speed_fisrt():
     print("it took", time.time() - start, "seconds.")
 
 def test_mid_speed_second():
-    string = 'aaafaaafasqaaaafaaaasaaaaafaaasaaaaaaaaasaffaaaaaaasaaaaaaaafaaaaaaaaasaaafaaaaas'
+    string = 'afffauoafffaaafafffauoafffaaaffa'
     for i in range(11):
         string = string + string
 
-    string = string + 'fffaafas'
-    substring = 'fffaaf'
+    string = string + 'fafafa'
+    substring = 'fafafafa'
 
     start = time.time()
     assert KMPAlg.knuth_morris_pratt(string, substring) == True
@@ -42,12 +42,12 @@ def test_mid_speed_second():
     print("it took", time.time() - start, "seconds.")
 
 def test_fast():
-    string = 'asaaaaaaasdaaaaaaaasaaaaaadaasaaaaaaaaasaaaaaaaaasaaaaaaaaasaaaaaaaaasaaaaaaaaas'
+    string = 'aasssaassdasaaassaasaasssas'
     for i in range(7):
         string = string + string
 
-    string = string + 'dsa'
-    substring = 'asdsa'
+    string = string + 'as'
+    substring = 'asas'
 
     start = time.time()
     assert KMPAlg.knuth_morris_pratt(string, substring) == True

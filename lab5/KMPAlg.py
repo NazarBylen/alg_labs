@@ -16,6 +16,7 @@ def knuth_morris_pratt(string, substring):
                 j = substring[j - 1] + 1
             else:
                 i += 1
+        print(substring)
         return substring
 
     def matcher(string, substring, pattern):
