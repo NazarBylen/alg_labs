@@ -3,12 +3,12 @@ import KMPAlg
 
 
 def test_slow():
-    string = 'abbabiaabbabaaiabbabbabaabbabaaaabb'
-    for i in range(10):
+    string = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+    for i in range(15):
         string = string + string
 
-    string = string + 'abab'
-    substring = 'abab'
+    string = string + 'jab'
+    substring = 'ajab'
 
     start = time.time()
     assert KMPAlg.knuth_morris_pratt(string, substring) == True
@@ -16,12 +16,13 @@ def test_slow():
     print("it took", time.time() - start, "seconds.")
 
 def test_mid_speed_fisrt():
-    string = 'ryoputhuytuitrurstutusiutyrtyts'
-    for i in range(10):
+    string = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+    for i in range(15):
         string = string + string
+        if i == 7:
+            string = string + 'b'
 
-    string = string + 'iusiusiu'
-    substring = 'siusiusiu'
+    substring = 'aaaab'
 
     start = time.time()
     assert KMPAlg.knuth_morris_pratt(string, substring) == True
@@ -29,12 +30,13 @@ def test_mid_speed_fisrt():
     print("it took", time.time() - start, "seconds.")
 
 def test_mid_speed_second():
-    string = 'iiiooklfkdlfalblppskvlfalojffa'
-    for i in range(10):
+    string = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+    for i in range(15):
         string = string + string
+        if i == 8:
+            string = string + 'c'
 
-    string = string + 'fafafa'
-    substring = 'fafafafa'
+    substring = 'aaaac'
 
     start = time.time()
     assert KMPAlg.knuth_morris_pratt(string, substring) == True
@@ -42,12 +44,12 @@ def test_mid_speed_second():
     print("it took", time.time() - start, "seconds.")
 
 def test_fast():
-    string = 'uuirieofkirokfgorgrpgp'
-    for i in range(10):
+    string = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+    for i in range(15):
         string = string + string
 
-    string = string + 'as'
-    substring = 'as'
+    string = string + 'a'
+    substring = 'aaaaa'
 
     start = time.time()
     assert KMPAlg.knuth_morris_pratt(string, substring) == True
