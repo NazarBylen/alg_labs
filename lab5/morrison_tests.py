@@ -16,13 +16,13 @@ def test_slow():
     print("it took", time.time() - start, "seconds.")
 
 def test_mid_speed_fisrt():
-    string = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+    string = 'akajbakaklaklakajbakaklaklakajbakakla'
     for i in range(15):
         string = string + string
-        if i == 7:
-            string = string + 'b'
 
-    substring = 'aaaab'
+    string = string + 'akajbakaklaklj'
+
+    substring = 'akajbakaklaklj'
 
     start = time.time()
     assert KMPAlg.knuth_morris_pratt(string, substring) == True
