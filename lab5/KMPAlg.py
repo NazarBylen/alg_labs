@@ -3,39 +3,41 @@ import numpy as np
 
 def knuth_morris_pratt(string, substring):
     def build_sub(substring_to_match):
-        j = 0
-        i = 1
+        start_index = 0
+        end_index = 1
 
         pattern__of_prefixes = np.full((len(substring_to_match)), -1)
 
-        while i < len(substring_to_match):
+        while end_index < len(substring_to_match):
 
-            if substring_to_match[i] == substring_to_match[j]:
-                pattern__of_prefixes[i] = j
-                i, j = i + 1, j + 1
+            if substring_to_match[end_index] == substring_to_match[start_index]:
+                pattern__of_prefixes[end_index] = start_index
+                end_index, start_index = end_index + 1, start_index + 1
 
-            elif j > 0:
-                j = pattern__of_prefixes[j - 1] + 1
+            elif start_index > 0:
+                start_index = pattern__of_prefixes[start_index - 1] + 1
 
             else:
-                i += 1
+                end_index += 1
         print(pattern__of_prefixes)
         return pattern__of_prefixes
 
     def matcher(string, substring, pattern):
-        i, j = 0, 0
-        while i < len(string):
+        start_index = 0
+        end_index = 0
 
-            if string[i] == substring[j]:
-                if j == len(substring) - 1:
+        while end_index < len(string):
+
+            if string[end_index] == substring[start_index]:
+                if start_index == len(substring) - 1:
                     return True
-                i, j = i + 1, j + 1
+                end_index, start_index = end_index + 1, start_index + 1
 
-            elif j > 0:
-                j = pattern[j - 1] + 1
+            elif start_index > 0:
+                start_index = pattern[start_index - 1] + 1
 
             else:
-                i += 1
+                end_index += 1
 
         return False
 
